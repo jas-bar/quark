@@ -9,23 +9,23 @@ int main(){
         return 1;
     }
     SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
-    if (win == nullptr){
+    if (win == NULL){
         std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << endl;
         SDL_Quit();
         return 1;
     }
 
     SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (ren == nullptr){
+    if (ren == NULL){
         SDL_DestroyWindow(win);
         cout << "SDL_CreateRenderer Error: " << SDL_GetError() << endl;
         SDL_Quit();
         return 1;
     }
 
-    string imagePath = getResourcePath("Lesson1") + "hello.bmp";
+    string imagePath = "hello.bmp";
     SDL_Surface *bmp = SDL_LoadBMP(imagePath.c_str());
-    if (bmp == nullptr){
+    if (bmp == NULL){
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
         cout << "SDL_LoadBMP Error: " << SDL_GetError() << endl;
@@ -35,7 +35,7 @@ int main(){
 
     SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
     SDL_FreeSurface(bmp);
-    if (tex == nullptr){
+    if (tex == NULL){
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
         std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
