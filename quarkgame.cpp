@@ -1,24 +1,39 @@
 #include "quarkgame.h"
+
 #include <iostream>
+
+void QuarkGame::addState(QuarkGameState *state, int stateId)
+{
+    if(gameStates[stateId] == NULL){
+        gameStates[stateId] = state;
+    } else {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Game state with id %d already exists!!!", stateId);
+    }
+}
 
 QuarkGame::QuarkGame()
 {
-
+    currentState = NULL;
 }
 
 void QuarkGame::init()
 {
-    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Game::Init");
+    initStates();
 }
 
 void QuarkGame::render()
 {
-    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Game::Render");
+    currentState->render();
 }
 
 void QuarkGame::update(Input *input)
 {
-    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Game::Update");
+    currentState->update(this, input);
+}
+
+void QuarkGame::switchState(int newState)
+{
+    currentState = gameStates[newState];
 }
 
 QuarkGame::~QuarkGame()
