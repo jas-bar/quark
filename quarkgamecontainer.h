@@ -4,6 +4,7 @@
 #include <memory>
 #include <SDL.h>
 #include "quarkgame.h"
+#include "input.h"
 
 class QuarkGameContainer
 {
