@@ -6,6 +6,9 @@ class QuarkGame
 {
 public:
     QuarkGame();
+    void init();
+    void render();
+    void update();
     ~QuarkGame();
 };
 
