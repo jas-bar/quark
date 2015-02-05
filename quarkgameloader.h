@@ -2,9 +2,8 @@
 #define QUARKGAMELOADER_H
 
 #include <memory>
-#include <SDL.h>
 #include <SDL_thread.h>
-#include <SDL_log.h>
+
 #include "quarkgame.h"
 #include "quarkgamecontainer.h"
 

@@ -1,10 +1,14 @@
 #include "quarkgameloader.h"
+#include <SDL.h>
+#include <SDL_log.h>
 
 static int sdlGameThreadCallback(void* data){
     QuarkGameContainer* container = static_cast<QuarkGameContainer*>(data);
     while(container->isRunning()){
+        container->tickStart();
         container->update();
         container->render();
+        container->tickEnd();
     }
     return 0;
 }

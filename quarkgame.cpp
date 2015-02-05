@@ -15,7 +15,7 @@ void QuarkGame::render()
 
 }
 
-void QuarkGame::update()
+void QuarkGame::update(Input *input)
 {
 
 }
