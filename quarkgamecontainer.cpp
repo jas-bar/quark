@@ -2,7 +2,8 @@
 
 QuarkGameContainer::QuarkGameContainer()
 {
-
+    running = true;
+    maxFPS = 60;
 }
 
 void QuarkGameContainer::setGame(QuarkGame *g)
@@ -12,10 +13,10 @@ void QuarkGameContainer::setGame(QuarkGame *g)
 
 void QuarkGameContainer::init()
 {
-    idealFrameDuration = (Uint32)(1000 / maxFPS);
-    window = SDL_CreateWindow("Quark Engine pre-pre-pre-alpha", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
-    game->init();
     input.reset(new Input());
+    idealFrameDuration = (Uint32)(1000 / maxFPS);
+    window = SDL_CreateWindow("Quark Engine pre-pre-pre-alpha", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
+    game->init();
 }
 
 void QuarkGameContainer::render()

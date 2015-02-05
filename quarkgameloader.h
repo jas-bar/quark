@@ -10,7 +10,7 @@
 using namespace std;
 
 
-class quarkgameloader
+class QuarkGameLoader
 {
 private:
     SDL_Thread* gameThread;
@@ -18,9 +18,9 @@ private:
     unique_ptr<QuarkGameContainer> container;
     void preInit();
 public:
-    quarkgameloader();
+    QuarkGameLoader();
     void loadGame(QuarkGame* g);
-    ~quarkgameloader();
+    ~QuarkGameLoader();
 };
 
 #endif // QUARKGAMELOADER_H
