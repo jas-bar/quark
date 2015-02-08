@@ -16,10 +16,10 @@ protected:
     void addState(QuarkGameState* state, int stateId);
 public:
     QuarkGame();
-    void init(SDL_Window* window);
+    virtual void init(SDL_Window* window);
     virtual void initStates() = 0;
-    void render();
-    void update(Input* input);
+    virtual void render();
+    virtual void update(Input* input);
     void switchState(int newState);
     ~QuarkGame();
 };
