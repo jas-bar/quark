@@ -44,6 +44,26 @@ bool Input::isQuitRequested()
     return quitRequested;
 }
 
+bool Input::isKeyDown(SDL_Keycode key)
+{
+    return keyState[key];
+}
+
+bool Input::isMouseDown(Uint8 button)
+{
+    return mouseState[button];
+}
+
+Sint32 Input::getMouseX()
+{
+    return mouseX;
+}
+
+Sint32 Input::getMouseY()
+{
+    return mouseY;
+}
+
 Input::~Input()
 {
 
