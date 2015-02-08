@@ -2,6 +2,7 @@
 #define QUARKGAME_H
 
 #include <map>
+#include <SDL.h>
 #include "input.h"
 
 class QuarkGameState;
@@ -15,7 +16,7 @@ protected:
     void addState(QuarkGameState* state, int stateId);
 public:
     QuarkGame();
-    void init();
+    void init(SDL_Window* window);
     virtual void initStates() = 0;
     void render();
     void update(Input* input);

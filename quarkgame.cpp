@@ -17,7 +17,7 @@ QuarkGame::QuarkGame()
     currentState = NULL;
 }
 
-void QuarkGame::init()
+void QuarkGame::init(SDL_Window* window)
 {
     initStates();
 }
