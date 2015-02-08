@@ -12,6 +12,7 @@ private:
     std::unique_ptr<Input> input;
     QuarkGame* game;
     SDL_Window* window;
+    SDL_GLContext glContext;
     Uint32 tickStartTime;
     Uint32 maxFPS, idealFrameDuration;
     bool running;
