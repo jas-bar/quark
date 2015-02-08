@@ -26,6 +26,7 @@ void QuarkGameContainer::init()
 void QuarkGameContainer::render()
 {
     game->render();
+    SDL_GL_SwapWindow(window);
 }
 
 void QuarkGameContainer::update()
