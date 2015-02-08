@@ -9,7 +9,7 @@ class QuarkGameState
 {
 public:
     QuarkGameState();
-    virtual void init() = 0;
+    virtual void init(QuarkGame* game) = 0;
     virtual void render() = 0;
     virtual void update(QuarkGame* game, Input* input) = 0;
     ~QuarkGameState();
