@@ -4,20 +4,26 @@
 #include <map>
 #include <memory>
 #include <string>
+#include "quarkresource.h"
+#include "quarkresourceloader.h"
 
-
-class QuarkResources
+class QuarkResourceManager
 {
 private:
-    std::map<std::string,std::unique_ptr<QuarkResource>> resourceMap;
+    std::map<std::string, std::unique_ptr<QuarkResource>> resourceMap;
+    std::map<std::string, std::unique_ptr<QuarkResourceLoader>> loaders;
+
+    std::string getKey(std::string relativeFilePath);
+    QuarkResource* loadResource(std::string filePath);
 
 public:
-    QuarkResources();
+    QuarkResourceManager();
 
-    int loadResources(std::string resourcesPath);
+    int loadResources(const char* resourcesPath);
+    QuarkResource* getResource(const char* key);
 
 
-    ~QuarkResources();
+    ~QuarkResourceManager();
 };
 
 #endif // QUARKRESOURCES_H
