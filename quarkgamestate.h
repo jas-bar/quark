@@ -1,9 +1,9 @@
 #ifndef QUARKGAMESTATE_H
 #define QUARKGAMESTATE_H
 
+#include "quarkgame.h"
 #include "input.h"
 
-class QuarkGame;
 
 class QuarkGameState
 {

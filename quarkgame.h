@@ -3,7 +3,8 @@
 
 #include <map>
 #include "input.h"
-#include "quarkgamestate.h"
+
+class QuarkGameState;
 
 class QuarkGame
 {

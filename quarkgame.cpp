@@ -1,6 +1,7 @@
 #include "quarkgame.h"
 
 #include <iostream>
+#include "quarkgamestate.h"
 
 void QuarkGame::addState(QuarkGameState *state, int stateId)
 {
