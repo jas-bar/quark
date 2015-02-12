@@ -28,3 +28,7 @@ endif(SDLMAIN_LIBRARY)
 include_directories(${INC_DIRS})
 target_link_libraries(${PROJECT_NAME} ${LIBS})
 
+install(TARGETS ${PROJECT_NAME} DESTINATION /usr/lib)
+file(GLOB HEADERS . "*.h")
+install(FILES ${HEADERS} DESTINATION /usr/include/quark/)
+install(FILES quark.pc DESTINATION /usr/lib/pkgconfig)
