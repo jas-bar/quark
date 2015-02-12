@@ -15,11 +15,11 @@ void QuarkGame::addState(QuarkGameState *state, int stateId)
 QuarkGame::QuarkGame()
 {
     currentState = NULL;
+    std::cout << "QuarkGame::QuarkGame" << std::endl;
 }
 
 void QuarkGame::init(SDL_Window* window)
 {
-    initStates();
 }
 
 void QuarkGame::render()
