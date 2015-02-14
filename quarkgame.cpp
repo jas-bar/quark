@@ -6,6 +6,7 @@
 void QuarkGame::addState(QuarkGameState *state, int stateId)
 {
     if(gameStates[stateId] == NULL){
+        state->init(this);
         gameStates[stateId] = state;
     } else {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Game state with id %d already exists!!!", stateId);
