@@ -46,7 +46,7 @@ QuarkResource* QuarkResourceManager::loadResource(std::string absoluteFilePath)
 
     SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Loading %s", absoluteFilePath.c_str());
 
-    QuarkResourceLoader* loader = loaders[ext].get();
+    QuarkResourceLoader* loader = loaders[ext];
     if(loader == NULL){
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "No loader registered for extension: '%s'", ext.c_str());
     }
@@ -60,21 +60,22 @@ QuarkResource* QuarkResourceManager::loadResource(std::string absoluteFilePath)
 
 QuarkResourceManager::QuarkResourceManager()
 {
-    QuarkIMGLoader* imgLoader = new QuarkIMGLoader();
-    loaders["png"] = std::unique_ptr<QuarkResourceLoader>(imgLoader);
-    loaders["bmp"] = std::unique_ptr<QuarkResourceLoader>(imgLoader);
-    loaders["jpeg"] = std::unique_ptr<QuarkResourceLoader>(imgLoader);
-    loaders["jpg"] = std::unique_ptr<QuarkResourceLoader>(imgLoader);
+    imgLoader.reset(new QuarkIMGLoader());
+    loaders["png"] = imgLoader.get();
+    loaders["bmp"] = imgLoader.get();
+    loaders["jpeg"] = imgLoader.get();
+    loaders["jpg"] = imgLoader.get();
 
-    loaders["wav"] = std::unique_ptr<QuarkResourceLoader>(new QuarkSoundLoader());
+    soundLoader.reset(new QuarkSoundLoader());
+    loaders["wav"] = soundLoader.get();
 
-    QuarkMusicLoader* musLoader = new QuarkMusicLoader();
-    loaders["mod"] = std::unique_ptr<QuarkResourceLoader>(musLoader);
-    loaders["ogg"] = std::unique_ptr<QuarkResourceLoader>(musLoader);
-    loaders["flag"] = std::unique_ptr<QuarkResourceLoader>(musLoader);
-    loaders["mp3"] = std::unique_ptr<QuarkResourceLoader>(musLoader);
-    loaders["midi"] = std::unique_ptr<QuarkResourceLoader>(musLoader);
-    loaders["mid"] = std::unique_ptr<QuarkResourceLoader>(musLoader);
+    musLoader.reset(new QuarkMusicLoader());
+    loaders["mod"] = musLoader.get();
+    loaders["ogg"] = musLoader.get();
+    loaders["flag"] = musLoader.get();
+    loaders["mp3"] = musLoader.get();
+    loaders["midi"] = musLoader.get();
+    loaders["mid"] = musLoader.get();
 }
 
 int QuarkResourceManager::loadResources(const char* resourcesPath)

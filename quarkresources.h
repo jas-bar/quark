@@ -11,10 +11,12 @@ class QuarkResourceManager
 {
 private:
     std::map<std::string, std::unique_ptr<QuarkResource>> resourceMap;
-    std::map<std::string, std::unique_ptr<QuarkResourceLoader>> loaders;
+    std::map<std::string, QuarkResourceLoader*> loaders;
 
     std::string getKey(std::string relativeFilePath);
     QuarkResource* loadResource(std::string filePath);
+
+    std::unique_ptr<QuarkResourceLoader> imgLoader, soundLoader, musLoader;
 
 public:
     QuarkResourceManager();
