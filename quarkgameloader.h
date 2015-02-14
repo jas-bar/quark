@@ -15,7 +15,6 @@ class QuarkGameLoader
 private:
     SDL_Thread* gameThread;
 
-    unique_ptr<QuarkGameContainer> container;
     void preInit();
 public:
     QuarkGameLoader();
