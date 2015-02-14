@@ -2,6 +2,7 @@
 #define QUARKRESOURCE_H
 
 #include <SDL.h>
+#include <GL/gl.h>
 #include <SDL_mixer.h>
 
 class QuarkResource
@@ -14,9 +15,13 @@ public:
 class QuarkImageResource : public QuarkResource {
 private:
     SDL_Surface* surface;
+    GLuint textureID;
 public:
     QuarkImageResource(SDL_Surface* surface);
     SDL_Surface* getSurface();
+    void loadIntoGL();
+    void setGLParameter(GLenum param, GLuint value);
+    GLuint getID();
     ~QuarkImageResource();
 
 };
