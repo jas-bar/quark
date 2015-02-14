@@ -2,11 +2,12 @@
 
 #define QUARK_GL_NULL 0
 
-BufferedRenderer::BufferedRenderer() :
+BufferedRenderer::BufferedRenderer(GLint mode) :
     vertices(Buffer<GLfloat>(BUFFER_SIZE*VERTEX_SIZE)),
     normals(Buffer<GLfloat>(BUFFER_SIZE*NORMAL_SIZE)),
     texCoords(Buffer<GLfloat>(BUFFER_SIZE*TEXCOORD_SIZE))
 {
+    this->mode = mode;
 }
 
 BufferedRenderer::~BufferedRenderer()
@@ -44,7 +45,7 @@ void BufferedRenderer::draw()
     glEnableClientState(GL_NORMAL_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-    glDrawArrays(GL_QUADS, 0, vertices.getDataCount());
+    glDrawArrays(mode, 0, vertices.getDataCount());
 
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);

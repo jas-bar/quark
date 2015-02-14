@@ -30,8 +30,9 @@ class BufferedRenderer
 {
 private:
     Buffer<GLfloat> vertices, normals, texCoords;
+    GLint mode;
 public:
-    BufferedRenderer();
+    BufferedRenderer(GLint mode);
     ~BufferedRenderer();
     void endEdit();
     void reset();
