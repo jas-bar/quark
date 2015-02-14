@@ -3,8 +3,9 @@
 #include <SDL_log.h>
 #include <iostream>
 
+
 static int sdlGameThreadCallback(void* data){
-    QuarkGameContainer* container = static_cast<QuarkGameContainer*>(data);
+    QuarkGameContainer* container = dynamic_cast<QuarkGameContainer*>((QuarkGameContainer*)data);
     container->init();
     SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "GameContainer initialized. Running game...");
     while(container->isRunning()){

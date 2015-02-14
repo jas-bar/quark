@@ -37,6 +37,11 @@ void QuarkGame::switchState(int newState)
     currentState = gameStates[newState];
 }
 
+void QuarkGame::print()
+{
+    std::cout << "QuarkGame::Print" << std::endl;
+}
+
 QuarkGame::~QuarkGame()
 {
 
