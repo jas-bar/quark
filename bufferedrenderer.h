@@ -1,8 +1,7 @@
 #ifndef BUFFEREDRENDERER_H
 #define BUFFEREDRENDERER_H
 
-#include <GL/gl.h>
-#include <GLES2/gl2.h>
+#include <SDL_opengl.h>
 
 #define BUFFER_SIZE     0x2000000
 #define VERTEX_SIZE     3

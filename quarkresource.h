@@ -2,7 +2,7 @@
 #define QUARKRESOURCE_H
 
 #include <SDL.h>
-#include <GL/gl.h>
+#include <SDL_opengl.h>
 #include <SDL_mixer.h>
 
 class QuarkResource
