@@ -1,6 +1,7 @@
 #ifndef QUARKRESOURCE_H
 #define QUARKRESOURCE_H
 
+#include <string>
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_mixer.h>
@@ -42,6 +43,17 @@ public:
     QuarkMusicResource(Mix_Music* music);
     Mix_Music* getMusic();
     ~QuarkMusicResource();
+};
+
+class QuarkShaderProgramResource : public QuarkResource {
+private:
+    std::string fragShaderText, vertShaderText;
+    GLuint programID;
+public:
+    QuarkShaderProgramResource(std::string fragText, std::string vertText);
+    GLuint link();
+    GLuint getProgramID();
+    ~QuarkShaderProgramResource();
 };
 
 #endif // QUARKRESOURCE_H

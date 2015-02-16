@@ -1,7 +1,9 @@
 #ifndef QUARKRESOURCELOADER_H
 #define QUARKRESOURCELOADER_H
 
+#include <string>
 #include "quarkresource.h"
+
 
 class QuarkResourceLoader
 {
@@ -20,6 +22,15 @@ public:
 };
 
 class QuarkMusicLoader : public QuarkResourceLoader {
+public:
+    QuarkResource* loadResource(const char *filePath);
+};
+
+class QuarkShaderProgramLoader : public QuarkResourceLoader {
+private:
+    bool fileExists(std::string filePath);
+    std::string readFile(std::string filePath);
+
 public:
     QuarkResource* loadResource(const char *filePath);
 };
