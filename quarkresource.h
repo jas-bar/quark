@@ -49,6 +49,8 @@ class QuarkShaderProgramResource : public QuarkResource {
 private:
     std::string fragShaderText, vertShaderText;
     GLuint programID;
+
+    GLuint loadShader(GLenum shaderType, std::string shaderText);
 public:
     QuarkShaderProgramResource(std::string fragText, std::string vertText);
     GLuint link();

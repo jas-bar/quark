@@ -90,6 +90,19 @@ QuarkMusicResource::~QuarkMusicResource()
 }
 
 
+GLuint QuarkShaderProgramResource::loadShader(GLenum shaderType, std::string shaderText)
+{
+    const char* shaderCSTR = shaderText.c_str();
+    const GLint strLen = (GLint)shaderText.length() + 1;
+
+    GLuint shaderObject = glCreateShader(shaderType);
+    glShaderSource(shaderObject, 1, &shaderCSTR, &strLen);
+    glCompileShader(shaderObject);
+    glAttachShader(programID, shaderObject);
+
+    return shaderObject;
+}
+
 QuarkShaderProgramResource::QuarkShaderProgramResource(std::string fragText, std::string vertText)
 {
     this->fragShaderText = fragText;
@@ -109,17 +122,11 @@ GLuint QuarkShaderProgramResource::link()
     programID = glCreateProgram();
 
     if(vertShaderText.length() > 0){
-        vertexShaderObject = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertexShaderObject, 1, vertShaderText.c_str(), vertShaderText.length() + 1);
-        glCompileShader(vertexShaderObject);
-        glAttachShader(programID, vertexShaderObject);
+        vertexShaderObject = loadShader(GL_VERTEX_SHADER, vertShaderText);
     }
 
     if(fragShaderText.length() > 0){
-        fragmentShaderObject = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragmentShaderObject, 1, fragShaderText.c_str(), fragShaderText.length() + 1);
-        glCompileShader(fragmentShaderObject);
-        glAttachShader(programID, fragmentShaderObject);
+        fragmentShaderObject = loadShader(GL_FRAGMENT_SHADER, fragShaderText);
     }
 
     glLinkProgram(programID);
