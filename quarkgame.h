@@ -16,7 +16,7 @@ protected:
     void addState(QuarkGameState* state, int stateId);
 public:
     QuarkGame();
-    virtual void init(SDL_Window* window);
+    virtual void init(SDL_Window* window, Input* input);
     virtual void render();
     virtual void update(Input* input);
     void switchState(int newState);

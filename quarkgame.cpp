@@ -19,7 +19,7 @@ QuarkGame::QuarkGame()
     std::cout << "QuarkGame::QuarkGame" << std::endl;
 }
 
-void QuarkGame::init(SDL_Window* window)
+void QuarkGame::init(SDL_Window* window, Input* input)
 {
 }
 
