@@ -9,63 +9,68 @@ Input::Input()
 void Input::update()
 {
     while(SDL_PollEvent(&event)){
-        switch(event.type){
-        /* MOUSE */
+        std::vector<InputListener*> listenerList = listeners[event.type];
 
-        case SDL_MOUSEMOTION:
-            mouseX = event.motion.x;
-            mouseY = event.motion.y;
-            break;
-        case SDL_MOUSEBUTTONDOWN:
-            mouseState[event.button.button] = true;
-            break;
-        case SDL_MOUSEBUTTONUP:
-            mouseState[event.button.button] = false;
-            break;
-
-        /* KEYS */
-        case SDL_KEYDOWN:
-            keyState[event.key.keysym.sym] = true;
-            break;
-        case SDL_KEYUP:
-            keyState[event.key.keysym.sym] = false;
-            break;
-
-        /* SPECIAL */
-        case SDL_QUIT:
-            quitRequested = true;
-            break;
+        for(auto it = listenerList.begin(); it != listenerList.end(); ++it){
+            InputListener* listener = (*it);
+            listener->onEvent(&event);
         }
     }
 }
 
-bool Input::isQuitRequested()
+void Input::registerListener(SDLEventType eventType, InputListener* listener)
 {
-    return quitRequested;
-}
-
-bool Input::isKeyDown(SDL_Keycode key)
-{
-    return keyState[key];
-}
-
-bool Input::isMouseDown(Uint8 button)
-{
-    return mouseState[button];
-}
-
-Sint32 Input::getMouseX()
-{
-    return mouseX;
-}
-
-Sint32 Input::getMouseY()
-{
-    return mouseY;
+    listeners[eventType].push_back(listener);
 }
 
 Input::~Input()
 {
-
+    for(auto mapIt = listeners.begin(); mapIt != listeners.end(); ++mapIt){
+        std::pair<SDLEventType, std::vector<InputListener*>> pair = (*mapIt);
+        for(auto listIt = pair.second.begin(); listIt != pair.second.end(); ++listIt){
+            InputListener* listener = (*listIt);
+            delete listener;
+        }
+    }
 }
 
+
+
+bool Keyboard::isKeyDown(SDL_Keycode key)
+{
+    return keyState[key];
+}
+
+void Keyboard::onEvent(SDL_Event* event)
+{
+    if(event->type == SDL_KEYDOWN){
+        keyState[event->key.keysym.sym] = true;
+    } else if(event->type == SDL_KEYUP){
+        keyState[event->key.keysym.sym] = false;
+    }
+}
+
+
+void Mouse::onEvent(SDL_Event* event)
+{
+    if(event->type == SDL_MOUSEMOTION){
+        mouseX = event->motion.x;
+        mouseY = event->motion.y;
+    }
+
+    if(event->type == SDL_MOUSEBUTTONDOWN)
+        mouseState[event->button.button] = true;
+
+    if(event->type == SDL_MOUSEBUTTONUP)
+        mouseState[event->button.button] = false;
+}
+
+Sint32 Mouse::getMouseX()
+{
+    return mouseX;
+}
+
+Sint32 Mouse::getMouseY()
+{
+    return mouseY;
+}
