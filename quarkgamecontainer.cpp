@@ -14,6 +14,7 @@ void QuarkGameContainer::setGame(QuarkGame *g)
 void QuarkGameContainer::init()
 {
     input.reset(new Input());
+    input->registerListener(SDL_QUIT, &quitListener);
     idealFrameDuration = (Uint32)(1000 / maxFPS);
     window = SDL_CreateWindow("Quark Engine pre-pre-pre-alpha", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
     glContext = SDL_GL_CreateContext(window);
@@ -21,7 +22,7 @@ void QuarkGameContainer::init()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     game->print();
-    game->init(window);
+    game->init(window, input.get());
 }
 
 void QuarkGameContainer::render()
@@ -33,7 +34,7 @@ void QuarkGameContainer::render()
 void QuarkGameContainer::update()
 {
     input->update();
-    if(input->isQuitRequested()){
+    if(quitListener.isQuitRequested()){
         running = false;
     }
     game->update(input.get());
@@ -65,3 +66,20 @@ QuarkGameContainer::~QuarkGameContainer()
     SDL_DestroyWindow(window);
 }
 
+
+
+QuarkGCQuitListener::QuarkGCQuitListener()
+{
+    quitRequested = false;
+}
+
+void QuarkGCQuitListener::onEvent(SDL_Event* event)
+{
+    if(event->type == SDL_QUIT)
+        quitRequested = true;
+}
+
+bool QuarkGCQuitListener::isQuitRequested()
+{
+    return quitRequested;
+}

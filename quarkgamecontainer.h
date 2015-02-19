@@ -6,6 +6,15 @@
 #include "quarkgame.h"
 #include "input.h"
 
+class QuarkGCQuitListener : public InputListener {
+private:
+    bool quitRequested;
+public:
+    QuarkGCQuitListener();
+    void onEvent(SDL_Event* event);
+    bool isQuitRequested();
+};
+
 class QuarkGameContainer
 {
 private:
@@ -16,6 +25,7 @@ private:
     Uint32 tickStartTime;
     Uint32 maxFPS, idealFrameDuration;
     bool running;
+    QuarkGCQuitListener quitListener;
 public:
     QuarkGameContainer();
     void setGame(QuarkGame* g);
