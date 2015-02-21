@@ -58,4 +58,12 @@ public:
     ~QuarkShaderProgramResource();
 };
 
+class QuarkJoyMappingsResource : public QuarkResource {
+private:
+    const char* filePath;
+public:
+    QuarkJoyMappingsResource(const char* filePath);
+    int load();
+};
+
 #endif // QUARKRESOURCE_H

@@ -144,3 +144,14 @@ QuarkShaderProgramResource::~QuarkShaderProgramResource()
 {
 
 }
+
+
+QuarkJoyMappingsResource::QuarkJoyMappingsResource(const char* filePath)
+{
+    this->filePath = filePath;
+}
+
+int QuarkJoyMappingsResource::load()
+{
+    return SDL_GameControllerAddMappingsFromFile(filePath);
+}

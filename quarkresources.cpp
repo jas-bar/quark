@@ -76,6 +76,9 @@ QuarkResourceManager::QuarkResourceManager()
     loaders["mp3"] = musLoader.get();
     loaders["midi"] = musLoader.get();
     loaders["mid"] = musLoader.get();
+
+    mappingLoader.reset(new QuarkJoyMappingsLoader());
+    loaders["map"] = mappingLoader.get();
 }
 
 int QuarkResourceManager::loadResources(const char* resourcesPath)

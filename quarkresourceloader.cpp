@@ -72,3 +72,9 @@ QuarkResource* QuarkShaderProgramLoader::loadResource(const char* filePath)
 
     return new QuarkShaderProgramResource(fragShaderString, vertShaderString);
 }
+
+
+QuarkResource*QuarkJoyMappingsLoader::loadResource(const char* filePath)
+{
+    return new QuarkJoyMappingsResource(filePath);
+}

@@ -35,4 +35,9 @@ public:
     QuarkResource* loadResource(const char *filePath);
 };
 
+class QuarkJoyMappingsLoader : public QuarkResourceLoader {
+public:
+    QuarkResource* loadResource(const char *filePath);
+};
+
 #endif // QUARKRESOURCELOADER_H

@@ -16,7 +16,7 @@ private:
     std::string getKey(std::string relativeFilePath);
     QuarkResource* loadResource(std::string filePath);
 
-    std::unique_ptr<QuarkResourceLoader> imgLoader, soundLoader, musLoader;
+    std::unique_ptr<QuarkResourceLoader> imgLoader, soundLoader, musLoader, mappingLoader;
 
 public:
     QuarkResourceManager();
