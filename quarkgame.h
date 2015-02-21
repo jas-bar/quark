@@ -20,7 +20,6 @@ public:
     virtual void render();
     virtual void update(Input* input);
     void switchState(int newState);
-    virtual void print();
     ~QuarkGame();
 };
 
