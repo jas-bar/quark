@@ -1,6 +1,6 @@
 #include "quarkgameloader.h"
-#include <SDL.h>
-#include <SDL_log.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_log.h>
 #include <iostream>
 
 

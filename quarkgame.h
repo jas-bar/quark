@@ -2,7 +2,7 @@
 #define QUARKGAME_H
 
 #include <map>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "input.h"
 
 class QuarkGameState;

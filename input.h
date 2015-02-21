@@ -4,7 +4,7 @@
 #include <map>
 #include <memory>
 #include <vector>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "inputlistener.h"
 
 class Keyboard : public InputListener {

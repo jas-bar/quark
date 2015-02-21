@@ -1,6 +1,6 @@
 #include <vector>
 #include <fstream>
-#include <SDL_log.h>
+#include <SDL2/SDL_log.h>
 #include "quarkresources.h"
 #include "quarkresourceloader.h"
 

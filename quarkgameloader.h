@@ -2,7 +2,7 @@
 #define QUARKGAMELOADER_H
 
 #include <memory>
-#include <SDL_thread.h>
+#include <SDL2/SDL_thread.h>
 
 #include "quarkgame.h"
 #include "quarkgamecontainer.h"

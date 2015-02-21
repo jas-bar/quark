@@ -1,6 +1,6 @@
 #include "quarkresource.h"
-#include <SDL_mixer.h>
-#include <SDL_opengles2.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_opengles2.h>
 
 QuarkResource::QuarkResource()
 {
