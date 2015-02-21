@@ -7,7 +7,7 @@
 #include <SDL.h>
 #include "inputlistener.h"
 
-class Keyboard : InputListener {
+class Keyboard : public InputListener {
 private:
     std::map<SDL_Keycode, bool> keyState;
 public:
@@ -20,7 +20,7 @@ public:
 
 typedef Sint32 SDLMouseCoordinates;
 
-class Mouse : InputListener {
+class Mouse : public InputListener {
 private:
     SDLMouseCoordinates mouseX, mouseY;
     std::map<Uint8, bool> mouseState;
@@ -35,7 +35,7 @@ typedef Uint32 SDLEventType;
 
 typedef Sint32 SDLJoyAxisValue;
 
-class GameController : InputListener {
+class GameController : public InputListener {
 private:
     int sdlIndex;
     SDL_GameController* controller;
@@ -67,6 +67,9 @@ class Input
 {
 private:
     SDL_Event event;
+    Keyboard keyboard;
+    Mouse mouse;
+    GameControllerManager gameControllerManager;
     std::map<SDLEventType, std::vector<InputListener*>> listeners;
 
     bool quitRequested;
@@ -75,6 +78,9 @@ public:
     Input();
     void update();
     void registerListener(SDLEventType eventType, InputListener* listener);
+    Keyboard* getKeyboard();
+    Mouse* getMouse();
+    GameControllerManager* getControllerManager();
     ~Input();
 };
 

@@ -4,6 +4,14 @@
 Input::Input()
 {
     quitRequested = false;
+    registerListener(SDL_MOUSEBUTTONDOWN, &mouse);
+    registerListener(SDL_MOUSEBUTTONUP, &mouse);
+    registerListener(SDL_MOUSEMOTION, &mouse);
+
+    registerListener(SDL_KEYDOWN, &keyboard);
+    registerListener(SDL_KEYUP, &keyboard);
+
+    gameControllerManager.init(this);
 }
 
 void Input::update()
@@ -21,6 +29,21 @@ void Input::update()
 void Input::registerListener(SDLEventType eventType, InputListener* listener)
 {
     listeners[eventType].push_back(listener);
+}
+
+Keyboard*Input::getKeyboard()
+{
+    return &keyboard;
+}
+
+Mouse*Input::getMouse()
+{
+    return &mouse;
+}
+
+GameControllerManager*Input::getControllerManager()
+{
+    return &gameControllerManager;
 }
 
 Input::~Input()
