@@ -15,6 +15,12 @@ public:
     bool isQuitRequested();
 };
 
+typedef struct EngineSettings {
+    char* windowTitle;
+    int width, height, maxFPS;
+    SDL_WindowFlags flags;
+}EngineSettings;
+
 class QuarkGameContainer
 {
 private:
@@ -29,7 +35,7 @@ private:
 public:
     QuarkGameContainer();
     void setGame(QuarkGame* g);
-    void init();
+    void init(EngineSettings* settings);
     void render();
     void update();
     bool isRunning();

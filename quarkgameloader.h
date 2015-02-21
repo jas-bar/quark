@@ -18,7 +18,7 @@ private:
     void preInit();
 public:
     QuarkGameLoader();
-    void loadGame(QuarkGame* g);
+    void loadGame(QuarkGame* g, EngineSettings* settings);
     ~QuarkGameLoader();
 };
 

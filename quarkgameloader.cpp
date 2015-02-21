@@ -7,7 +7,7 @@
 QuarkGameContainer* container;
 
 static int sdlGameThreadCallback(void* data){
-    container->init();
+    container->init((EngineSettings*)data);
     SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "GameContainer initialized. Running game...");
     while(container->isRunning()){
         container->tickStart();
@@ -32,11 +32,11 @@ QuarkGameLoader::QuarkGameLoader()
 {
 }
 
-void QuarkGameLoader::loadGame(QuarkGame* g)
+void QuarkGameLoader::loadGame(QuarkGame* g, EngineSettings* settings)
 {
     preInit();
     container->setGame(g);
-    gameThread = SDL_CreateThread(sdlGameThreadCallback, "gameThread", NULL);
+    gameThread = SDL_CreateThread(sdlGameThreadCallback, "gameThread", settings);
     SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "GameThread started successfully.");
     // wait for game thread to terminate
     int threadStatus;
