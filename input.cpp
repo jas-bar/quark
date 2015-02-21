@@ -74,3 +74,69 @@ Sint32 Mouse::getMouseY()
 {
     return mouseY;
 }
+
+
+void GameControllerManager::addGameController(Input* input, SDL_JoystickID sdlJoystickIndex)
+{
+    controllers.push_back(GameController(sdlJoystickIndex));
+}
+
+void GameControllerManager::init(Input* input)
+{
+    int joyCount = SDL_NumJoysticks();
+    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Found %d joysticks", joyCount);
+    for(int j = 0; j < joyCount; ++j){
+        if(SDL_IsGameController(j)){
+            addGameController(input, j);
+        }
+    }
+}
+
+int GameControllerManager::getControllerCount()
+{
+    return controllers.size();
+}
+
+GameController*GameControllerManager::getController(int num)
+{
+    return &(controllers.at(num));
+}
+
+
+GameController::GameController(int sdlIndex)
+{
+    this->sdlIndex = sdlIndex;
+    this->controller = SDL_GameControllerOpen(sdlIndex);
+}
+
+void GameController::onEvent(SDL_Event* event)
+{
+    switch(event->type){
+    case SDL_CONTROLLERAXISMOTION:
+        if(event->caxis.which == sdlIndex){
+            axes[event->caxis.axis] = event->caxis.value;
+        }
+        break;
+    case SDL_CONTROLLERBUTTONDOWN:
+        if(event->cbutton.which == sdlIndex){
+            buttons[event->cbutton.button] = true;
+        }
+        break;
+    case SDL_CONTROLLERBUTTONUP:
+        if(event->cbutton.which == sdlIndex){
+            buttons[event->cbutton.button] = false;
+        }
+        break;
+    }
+}
+
+
+bool GameController::isButtonDown(Uint8 button)
+{
+    return buttons[button];
+}
+
+SDLJoyAxisValue GameController::getAxisValue(Uint8 axis)
+{
+    return axes[axis];
+}
