@@ -1,7 +1,7 @@
 #ifndef INPUTLISTENER_H
 #define INPUTLISTENER_H
 
-#include <SDL_events.h>
+#include <SDL2/SDL_events.h>
 
 class InputListener
 {
