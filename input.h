@@ -11,10 +11,10 @@ class Keyboard : public InputListener {
 private:
     std::map<SDL_Keycode, bool> keyState;
 public:
-    Keyboard();
+    Keyboard() {}
     bool isKeyDown(SDL_Keycode key);
     void onEvent(SDL_Event* event) override;
-    ~Keyboard();
+    ~Keyboard() {}
 
 };
 
@@ -25,10 +25,12 @@ private:
     SDLMouseCoordinates mouseX, mouseY;
     std::map<Uint8, bool> mouseState;
 public:
+    Mouse() {}
     void onEvent(SDL_Event* event) override;
     bool isMouseDown(Uint8 button);
     Sint32 getMouseX();
     Sint32 getMouseY();
+    ~Mouse() {}
 };
 
 typedef Uint32 SDLEventType;
@@ -48,6 +50,8 @@ public:
 
     bool isButtonDown(Uint8 button);
     SDLJoyAxisValue getAxisValue(Uint8 axis);
+
+    ~GameController();
 };
 
 class Input;
@@ -67,11 +71,10 @@ class Input
 {
 private:
     SDL_Event event;
-    Keyboard keyboard;
-    Mouse mouse;
-    GameControllerManager gameControllerManager;
     std::map<SDLEventType, std::vector<InputListener*>> listeners;
-
+    Keyboard* keyboard;
+    Mouse* mouse;
+    GameControllerManager* gameControllerManager;
     bool quitRequested;
 
 public:

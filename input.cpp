@@ -4,14 +4,17 @@
 Input::Input()
 {
     quitRequested = false;
-    registerListener(SDL_MOUSEBUTTONDOWN, &mouse);
-    registerListener(SDL_MOUSEBUTTONUP, &mouse);
-    registerListener(SDL_MOUSEMOTION, &mouse);
+    mouse = new Mouse();
+    registerListener(SDL_MOUSEBUTTONDOWN, mouse);
+    registerListener(SDL_MOUSEBUTTONUP, mouse);
+    registerListener(SDL_MOUSEMOTION, mouse);
 
-    registerListener(SDL_KEYDOWN, &keyboard);
-    registerListener(SDL_KEYUP, &keyboard);
+    keyboard = new Keyboard();
+    registerListener(SDL_KEYDOWN, keyboard);
+    registerListener(SDL_KEYUP, keyboard);
 
-    gameControllerManager.init(this);
+    gameControllerManager = new GameControllerManager();
+    gameControllerManager->init(this);
 }
 
 void Input::update()
@@ -31,30 +34,31 @@ void Input::registerListener(SDLEventType eventType, InputListener* listener)
     listeners[eventType].push_back(listener);
 }
 
-Keyboard*Input::getKeyboard()
+Keyboard* Input::getKeyboard()
 {
-    return &keyboard;
+    return keyboard;
 }
 
-Mouse*Input::getMouse()
+Mouse* Input::getMouse()
 {
-    return &mouse;
+    return mouse;
 }
 
-GameControllerManager*Input::getControllerManager()
+GameControllerManager* Input::getControllerManager()
 {
-    return &gameControllerManager;
+    return gameControllerManager;
 }
 
 Input::~Input()
 {
-    for(auto mapIt = listeners.begin(); mapIt != listeners.end(); ++mapIt){
+    /*for(auto mapIt = listeners.begin(); mapIt != listeners.end(); ++mapIt){
         std::pair<SDLEventType, std::vector<InputListener*>> pair = (*mapIt);
-        for(auto listIt = pair.second.begin(); listIt != pair.second.end(); ++listIt){
-            InputListener* listener = (*listIt);
-            delete listener;
+        for(int i = 0; i < pair.second.size(); ++i){
+            InputListener* listener = pair.second[i];
+            if(listener != (InputListener*)&mouse && listener != (InputListener*)&keyboard && listener != (InputListener*)&gameControllerManager)
+                delete listener;
         }
-    }
+    }*/
 }
 
 
@@ -162,4 +166,9 @@ bool GameController::isButtonDown(Uint8 button)
 SDLJoyAxisValue GameController::getAxisValue(Uint8 axis)
 {
     return axes[axis];
+}
+
+GameController::~GameController()
+{
+    SDL_GameControllerClose(controller);
 }
