@@ -59,6 +59,9 @@ Input::~Input()
                 delete listener;
         }
     }*/
+    delete gameControllerManager;
+    delete mouse;
+    delete keyboard;
 }
 
 
