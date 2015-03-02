@@ -1,6 +1,6 @@
 #include "quarkresource.h"
 #include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_opengles2.h>
+
 
 QuarkResource::QuarkResource()
 {
@@ -33,7 +33,7 @@ void QuarkImageResource::loadIntoGL()
         glTexImage2D(GL_TEXTURE_2D, 0,
                      surface->format->BytesPerPixel,
                      surface->w, surface->h,
-                     0, GL_BGR, GL_UNSIGNED_BYTE,
+                     0, GL_RGB, GL_UNSIGNED_BYTE,
                      surface->pixels);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
