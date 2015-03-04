@@ -4,12 +4,21 @@
 #include <string>
 #include "quarkresource.h"
 
-
+/**
+ * @brief Loads resources from files
+ */
 class QuarkResourceLoader
 {
 public:
+    /**
+     * @brief Returns QuarkResource loaded from the given file
+     * @param filePath File to load resource from
+     * @return The resource loaded from the given file
+     */
     virtual QuarkResource* loadResource(const char* filePath) = 0;
 };
+
+// Here are various loaders. You can check quark implementation if you want to see how these work...
 
 class QuarkIMGLoader : public QuarkResourceLoader {
 public:

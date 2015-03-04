@@ -7,6 +7,10 @@
 #include "quarkresource.h"
 #include "quarkresourceloader.h"
 
+/**
+ * @brief Loads images, sounds, shaders, and joystick mappings
+ *
+ */
 class QuarkResourceManager
 {
 private:
@@ -21,7 +25,18 @@ private:
 public:
     QuarkResourceManager();
 
+    /**
+     * @brief Loads resources from specified folder
+     * @param resourcesPath Path to the folder
+     * @return Always 0, will be used for errors in the future
+     */
     int loadResources(const char* resourcesPath);
+
+    /**
+     * @brief Returns resource based on given key.
+     * @param key If you want `res/example/something.png`, your key is `example.something`. You don't need to care about the file extension.
+     * @return The resource you wanted. You then need to cast it accordingly to get the correct data...
+     */
     QuarkResource* getResource(const char* key);
 
 

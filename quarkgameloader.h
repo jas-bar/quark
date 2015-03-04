@@ -9,7 +9,10 @@
 
 using namespace std;
 
-
+/**
+ * @brief Loads your game :)
+ * ...and keeps your main.cpp clear.
+ */
 class QuarkGameLoader
 {
 private:
@@ -18,7 +21,14 @@ private:
     void preInit();
 public:
     QuarkGameLoader();
+
+    /**
+     * @brief Starts the specified game
+     * @param g The game to start(you must create the game yourself and pass it here)
+     * @param settings EngineSettings to use
+     */
     void loadGame(QuarkGame* g, EngineSettings* settings);
+
     ~QuarkGameLoader();
 };
 

@@ -15,9 +15,33 @@ public:
     bool isQuitRequested();
 };
 
+/** @brief Stores settings of the engine
+  */
 typedef struct EngineSettings {
+    /**
+     * @brief Title of game's window
+     */
     char* windowTitle;
-    int width, height, maxFPS;
+
+    /**
+     * @brief Width of game's window
+     */
+    int width;
+
+    /**
+     * @brief Height of game's window
+     */
+    int height;
+
+    /**
+     * @brief Maximum FPS to allow the game to run on
+     */
+    int maxFPS;
+
+    /**
+     * @brief SDL_WindowFlags for the window.
+     * Default = SDL_WINDOW_OPENGL
+     */
     SDL_WindowFlags flags;
 }EngineSettings;
 
